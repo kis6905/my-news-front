@@ -1,4 +1,11 @@
-# my-news-vue
+## 개요
+* My News Front-end
+
+## 기술 스택
+* vue(+router)
+* vue material
+* axios
+* less
 
 ## Project setup
 ```
@@ -24,6 +31,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
