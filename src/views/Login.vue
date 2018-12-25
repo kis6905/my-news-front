@@ -50,8 +50,8 @@ export default {
         userId: this.userId,
         password: this.password
       })
+
       console.log('response ', response)
-      
       if (response.data.key === 'value') {
         this.$router.push('mypage')
       }
