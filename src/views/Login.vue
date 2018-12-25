@@ -11,23 +11,50 @@
       <md-card class="form-card">
         <md-field md-clearable>
           <label>ID</label>
-          <md-input class="input-id"></md-input>
+          <md-input class="input-id" v-model="userId"></md-input>
         </md-field>
         <md-field>
           <label>비밀번호</label>
-          <md-input class="input-pwd" type="password"></md-input>
+          <md-input class="input-pwd" type="password" v-model="password"></md-input>
         </md-field>
+
+        <md-card-actions>
+          <md-button class="md-primary" v-on:click="handleLogin">Login</md-button>
+        </md-card-actions>
       </md-card>
     </div>
   </div>
 </template>
 
 <script>
+import common from '../assets/js/common'
+
 export default {
   name: 'login',
+  mixins: [common],
   data: () => {
     return {
+      userId: '',
+      password: ''
+    }
+  },
+  methods: {
+    handleLogin: async function (event) {
+      if (!this.userId || !this.password) {
+        alert('ID와 비밀번호를 입력해주세요')
+        return false
+      }
+      console.log('handleLogin', this.id)
 
+      let response = await this.requestPostJson(`http://localhost:8000/login`, {
+        userId: this.userId,
+        password: this.password
+      })
+      console.log('response ', response)
+      
+      if (response.data.key === 'value') {
+        this.$router.push('mypage')
+      }
     }
   }
 }
@@ -88,8 +115,8 @@ export default {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  -webkit-animation: zoomin 20s ease-in infinite;
-  animation: zoomin 20s ease-in infinite;
+  -webkit-animation: zoomin 10s ease-in infinite;
+  animation: zoomin 10s ease-in infinite;
   transition: all .5s ease-in-out;
   overflow: hidden;
 }
@@ -99,8 +126,8 @@ export default {
   height: 100vh;
   text-align:center;
   background: none;
-  -webkit-animation: zoomout 20s ease-in infinite;
-  animation: zoomout 20s ease-in infinite;
+  -webkit-animation: zoomout 10s ease-in infinite;
+  animation: zoomout 10s ease-in infinite;
   transition: all .5s ease-in-out;
   overflow: hidden;
 }
